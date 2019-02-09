@@ -1,16 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="app">
     <head>
-        <title>My App!</title>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script> -->
+        <title>Angular JS</title>
     </head>
-    <body ng-controller="AppController">
-        <!--scope of the Angular app  -->
-        <div ng-app="app">
 
-            <p>Enter text to show 2-way data binding:</p>
-            <p>Name: <input type="text" ng-model="name"></p>
-            <p ng-bind="name"></p>
+    <!-- instruct <body> tag to use 'main' controller for scope context -->
+    <body ng-controller="main">
+        <div>
+
+            <!-- data-bound list -->
+            <table>
+                <tr ng-repeat="p in presidents">
+                    <td>{{ p.first }}</td>
+                    <td>{{ p.last }}</td>
+                    <td>
+                        <!-- call method from parent scope and deliver parameters -->
+                        <button type="button" ng-click="$parent.remove( p )">Remove</button>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- bind DOM inputs to scope objects -->
+            <input type="text" ng-model="firstName" placeholder="First Name">
+            <input type="text" ng-model="lastName" placeholder="Last Name">
+
+            <!-- bind event handler to specific controller method -->
+            <button type="button" ng-click="add()">Add</button>
         </div>
 
         <script src="js/vendor/angular.js"></script>
@@ -19,6 +34,51 @@
             'use strict'
 
             var app = angular.module( 'app', [] );
+
+            // simple angular controller
+            app.controller( 'main', [ '$scope', function( $scope ) {
+
+                // define controller properties directly on the $scope
+                $scope.firstName = undefined;
+                $scope.lastName = undefined;
+                $scope.gender = 'female';
+                $scope.style = { color: 'orange' };
+
+                $scope.presidents = [
+                    {
+                        first: 'George', last: 'Washington'
+                    },
+                    {
+                        first: 'Thomas', last: 'Jefferson'
+                    },
+                    {
+                        first: 'Andrew', last: 'Jackson'
+                    }
+                ];
+
+                // controller method definition
+                $scope.add = function() {
+
+                    var person = {
+                        first: $scope.firstName,
+                        last: $scope.lastName,
+                        gender: $scope.gender
+                    }
+
+                    // reset form values to default
+                    $scope.firstName = undefined;
+                    $scope.lastName = undefined;
+
+                    $scope.presidents.push( person );
+                }
+
+                // remove method callable from child scope
+                $scope.remove = function( president ) {
+
+                    $scope.presidents.splice( $scope.presidents.indexOf( president ), 1 );
+                }
+            }]);
+
         </script>
     </body>
 </html>
