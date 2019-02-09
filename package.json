@@ -1,0 +1,27 @@
+{
+  "name": "angular-js-modular",
+  "version": "1.0.0",
+  "description": "Simple setup of Angular JS modular approach using grunt (legacy)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build_angular": "bower install angular"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentPauley/angular-js-modular.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VincentPauley/angular-js-modular/issues"
+  },
+  "homepage": "https://github.com/VincentPauley/angular-js-modular#readme",
+  "dependencies": {
+    "angular": "^1.5.11",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "bower": "^1.8.8"
+  }
+}

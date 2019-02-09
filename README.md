@@ -1,0 +1,1 @@
+Simple setup of Angular JS modular approach using grunt (legacy)
