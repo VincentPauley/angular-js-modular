@@ -31,6 +31,21 @@ module.exports = function( grunt ) {
                     'dist/js/script.js': [ 'bower_components/angular/angular.js', 'src/**/*.js' ] 
                 }
             }
+        },
+        copy: {
+            images: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/images/',
+                        src: [ '**/*.{png,jpg,svg,ico}' ],
+                        dest: 'dist/images'
+                    }
+                ]
+                // {
+                //     'dist/images/': 'src/images/*'
+                // }
+            }
         }
     };
 
@@ -42,9 +57,10 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( 'grunt-contrib-jshint' );
     grunt.loadNpmTasks( 'grunt-contrib-uglify' );
     grunt.loadNpmTasks( 'grunt-targethtml' );
+    grunt.loadNpmTasks( 'grunt-contrib-copy' );
     
     // ==================
     // create custom tasks
     // ==================
-    grunt.registerTask( 'build', 'Building Application', [ 'jshint','uglify', 'targethtml']);
+    grunt.registerTask( 'build', 'Building Application', [ 'jshint', 'uglify', 'targethtml', 'copy' ]);
 };
