@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build_angular": "bower install angular"
+    "build_angular": "bower install angular",
+    "build": "grunt build"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,11 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
-    "bower": "^1.8.8"
+    "bower": "^1.8.8",
+    "grunt": "^1.0.3",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-targethtml": "^0.2.6",
+    "jshint-stylish": "^2.2.1"
   }
 }
