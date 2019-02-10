@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+    <head>
+        <title>Angular JS (Directives)</title>
+    </head>
+
+    <body>
+
+        <author-names title="Title Value"></author-names>
+
+        <script src="js/vendor/angular.js"></script>
+        <script>
+        
+            'use strict'
+
+            var app = angular.module( 'app', [] );
+
+            app.directive(
+                'authorNames', // < directive name, will be: author-names in DOM
+                function( $compile ) { // factory function to define behavior
+
+                    // factory MUST return a "Directive Definition Object"
+                    return {
+                        restrict: 'E', // < must be used as an element
+                        scope: {
+                            title_text: "@title" // < define properties to be passed in, with the "@" prefix changes to parent scope value will update scope here
+                            // without "@" prefix it would be isolated to the scope here and would NOT watch the parent
+                        },
+                        controller: function($scope) {
+
+                            $scope.people = [
+                                {
+                                    firstName: 'Colin',
+                                    lastName: 'Ihrig'
+                                },
+                                {
+                                    firstName: 'Mark',
+                                    lastName: 'Twain'
+                                }
+                            ];
+                        },
+                        // link will always receive these 5 arguments
+                        link: function(
+                                scope,
+                                element, // element from within the DOM
+                                attrs,
+                                controller,
+                                transclude
+                            ) {
+
+                                // create a string template for the directive to take on
+                                var template = scope.people.map(function( person ) {
+
+                                    return '<div>' + scope.title_text + person.firstName + ' ' + person.lastName + '</div>';
+                                }).join('');
+
+                                // compile template using the Angular method and provide its scope
+                                var newElement = $compile( template )(scope);
+
+                                // overwrite conetent
+                                element.replaceWith( newElement );
+                        }
+                    }
+
+            });
+
+        </script>
+    </body>
+</html>
